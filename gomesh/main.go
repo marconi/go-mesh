@@ -156,7 +156,7 @@ func NewServent() *Servent {
 }
 
 /**
- * Payload type messages
+ * Message methods
  */
 
 func (s *Servent) Ping() error {
@@ -190,11 +190,8 @@ func (s *Servent) Ping() error {
 	fmt.Println("Got: ", string(buf.Bytes()))
 	return nil
 }
-func (s *Servent) Pong(conn net.Conn) {}
-func (s *Servent) Query()             {}
-func (s *Servent) QueryHit()          {}
-func (s *Servent) Push()              {}
-func (s *Servent) Bye()               {}
+func (s *Servent) Query() {}
+func (s *Servent) Bye()   {}
 func (s *Servent) ParseMessage(raw_msg []byte) *Message {
 	guid, err := uuid.Parse(raw_msg[:16])
 	if err != nil {
@@ -223,6 +220,10 @@ func (s *Servent) ParseMessage(raw_msg []byte) *Message {
 func main() {
 	servent := NewServent()
 	if err := servent.Bootstrap(); err != nil {
+		log.Fatalln(err)
+	}
+
+	if err := servent.Ping(); err != nil {
 		log.Fatalln(err)
 	}
 }
