@@ -1,4 +1,4 @@
-package gomesh
+package libs
 
 import (
 	"bufio"
