@@ -92,10 +92,10 @@ func (s *Servent) Handshake(conn net.Conn) error {
 		s.CachePeers(u_peers)
 	}
 
-	// save any try-hubs we get
-	if t_hubs, ok := h["X-Try"]; ok {
+	// save any x-try we get
+	if t_peers, ok := h["X-Try"]; ok {
 		fmt.Println("Parsing x-tries...")
-		s.CachePeers(t_hubs)
+		s.CachePeers(t_peers)
 	}
 
 	// handle any non-200 and incompatible protocol response
@@ -103,8 +103,8 @@ func (s *Servent) Handshake(conn net.Conn) error {
 		return errors.New(h["Title"])
 	}
 
-	// if everything is fine, accept the hub
-	fmt.Println("Accepting hub...")
+	// if everything is fine, accept the peer
+	fmt.Println("Accepting peer...")
 	payload = "GNUTELLA/0.6 200 OK\r\n\r\n"
 	fmt.Println(payload)
 	if _, err := conn.Write([]byte(payload)); err != nil {
