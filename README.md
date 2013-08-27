@@ -8,6 +8,7 @@ Still under development, right now it only does the following:
 
 * Hub lookup
 * Cache ultra-peers and hubs
+* Handshake
 
 ## TODO
 
